@@ -1,9 +1,9 @@
-const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
-const { users, roles } = require('./models');
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
+const { users, roles } = require("./models");
 
 const register = async (user) => {
-  console.log('USER: ', user);
+  console.log("USER: ", user);
   // check if the user exist in the database
   const savedUser = users.filter((u) => u.email === user.email);
   // check if this array os empty or notify
@@ -24,7 +24,7 @@ const register = async (user) => {
     // return 'Create new user successfully'
   } else {
     // old user
-    return 'User already exists';
+    return "User already exists";
   }
   /*
    [{
@@ -33,20 +33,21 @@ const register = async (user) => {
      role_id: 2,
    }],
     */
-  
 };
 
 const login = async (user) => {
   const savedUser = users.filter((u) => u.email === user.email);
 
   if (savedUser.length === 0) {
-    return 'User Not Found please register';
+    return "User Not Found please register";
   } else {
     // check if the password is correct password
     //              the normal password, the hash ppasword
     if (await bcrypt.compare(user.password, savedUser[0].password)) {
       // return token
-      const savedPermission = roles.filter((p) => p.id === savedUser[0].role_id);
+      const savedPermission = roles.filter(
+        (p) => p.id === savedUser[0].role_id
+      );
 
       const payload = {
         email: savedUser[0].email,
@@ -60,7 +61,7 @@ const login = async (user) => {
       return await jwt.sign(payload, process.env.SECRET, options);
       // return 'Login successfully'
     } else {
-      return 'Username or password not correct';
+      return "Username or password not correct";
     }
   }
   /* 
