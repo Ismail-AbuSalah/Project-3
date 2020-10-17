@@ -1,20 +1,20 @@
-const express = require('express');
-const { register, login, getUsers } = require('./controller');
+const express = require("express");
+const { register, login, getUsers } = require("./controller");
 
-const middleware = require('./middlewares');
+const middleware = require("./middlewares");
 
 const authRouter = express.Router();
 
-authRouter.get('/', async (req, res) => {
+authRouter.get("/", async (req, res) => {
   res.json(await getUsers());
 });
 
-authRouter.get('/protected', middleware, (req, res) => {
+authRouter.get("/protected", middleware, (req, res) => {
   // res.json('Hello World');
-  res.json(['ali','khalil']);
+  res.json(["ali", "khalil"]);
 });
 
-authRouter.post('/register', async (req, res) => {
+authRouter.post("/register", async (req, res) => {
   try {
     res.json(await register(req.body));
   } catch (err) {
@@ -22,7 +22,7 @@ authRouter.post('/register', async (req, res) => {
   }
 });
 
-authRouter.post('/login', async (req, res) => {
+authRouter.post("/login", async (req, res) => {
   try {
     res.json(await login(req.body));
   } catch (err) {
@@ -30,8 +30,7 @@ authRouter.post('/login', async (req, res) => {
   }
 });
 
-module.exports =authRouter
-
+module.exports = authRouter;
 
 /* 
 token for 1 hour 12:28

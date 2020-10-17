@@ -78,8 +78,23 @@ const getUsers = () => {
   return users;
 };
 
+const updateUsers = () => {
+  return users;
+};
+
+const addUsers = () => {
+  return users;
+};
+
+const delUsers = () => {
+  return users;
+};
+
 module.exports = {
   register,
   login,
   getUsers,
+  updateUsers,
+  addUsers,
+  delUsers,
 };
